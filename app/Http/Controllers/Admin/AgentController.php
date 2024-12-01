@@ -51,6 +51,8 @@ public function store(Request $request)
         'nationality' => 'required|min:5',
         'training_path' => 'required|min:5',
         'cv' => ['required','file','mimes:pdf,doc,docx,jpg,png','max:2048'],
+        'support_type'=>'required|min:5',
+        'available_time'=>'required|min:5',
 
     ]);
     if ($request->hasFile('file')) {
@@ -103,6 +105,8 @@ public function store(Request $request)
         'nationality' => 'required|min:3',
         'training_path' => 'required|min:3',
         'cv' => ['required','file','mimes:pdf,doc,docx,jpg,png','max:2048'],
+        'support_type'=>'required|min:5',
+        'available_time'=>'required|min:5',
     ]);
     if($validator->passes()){
             $agents=Agent::findOrFail($id);
@@ -119,6 +123,8 @@ public function store(Request $request)
             $agents->nationality=$request->nationality;
             $agents->training_path=$request->training_path;
             $agents->cv=$request->cv;
+            $agents->support_type=$request->support_type;
+            $agents->available_time=$request->available_time;
             $agents->update();
             session()->flash('success','User Information Updated Successfully');
              return response()->json([

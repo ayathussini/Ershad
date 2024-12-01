@@ -31,20 +31,16 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data=$request->validate([
             'title' => ['required','string','max:60','min:5'],
             'description' => ['required','string','max:60','min:5'],
             'instructor' => ['required','string'],
-            'duration' => ['required',],
             'category'=>['required'],
+            'duration' => ['required',],
+            'course_link'=>['required','url']
+
         ]);
-          Course::create([
-           'title' => $request->title,
-           'description' => $request->description,
-           'instructor' => $request->instructor,
-           'duration' => $request->duration,
-           'category' => $request->category,
-    ]);
+          $course=Course::create($data);
         return redirect()->route('course.index')->with('success', 'Course added successfully!');
     }
 
@@ -88,7 +84,7 @@ class CourseController extends Controller
             $courses->category=$request->category;
             $courses->duration=$request->duration;
             $courses->update();
-            session()->flash('success','User Information Updated Successfully');
+            session()->flash('success','course Information Updated Successfully');
              return response()->json([
                 'status'=>true,
                 'errors'=>[]

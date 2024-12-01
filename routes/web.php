@@ -1,13 +1,16 @@
 <?php
 
+use App\Models\PathTraining;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ApplicationController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\JobController;
-use App\Http\Controllers\Admin\AssistantController;
-use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\PathTrainingController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\AssistantController;
+use App\Http\Controllers\Admin\ApplicationController;
 
 Route::get('/home', function () {
     return view('home'); 
@@ -98,6 +101,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/archive', [courseController::class, 'archive'])->name('course.archive');
         Route::post('/{id}/restore', [courseController::class, 'restore'])->name('course.restore');
         Route::delete('/{id}/forceDelete', [courseController::class, 'forceDelete'])->name('course.forceDelete');
+    });
+    Route::prefix('tasks')->group(function () {
+        Route::get('/index', [TaskController::class, 'index'])->name('tasks.index');
+        Route::get('/create', [TaskController::class, 'create'])->name('tasks.create');
+        Route::post('/store', [TaskController::class, 'store'])->name('tasks.store');
+        Route::get('/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+        Route::put('/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
+        Route::delete('/{id}/delete', [TaskController::class, 'delete'])->name('tasks.delete');
+      
+    });
+    Route::prefix('path')->group(function () {
+        Route::get('/index', [PathTrainingController::class, 'index'])->name('path.index');
+        Route::get('/create', [PathTrainingController::class, 'create'])->name('path.create');
+        Route::post('/store', [PathTrainingController::class, 'store'])->name('path.store');
+        Route::get('/{id}/show', [PathTrainingController::class, 'show'])->name('path.show');
+        Route::get('/{id}/edit', [PathTrainingController::class, 'edit'])->name('path.edit');
+        Route::put('/{id}/update', [PathTrainingController::class, 'update'])->name('path.update');
+        Route::delete('/{id}/delete', [PathTrainingController::class, 'delete'])->name('path.delete');
+        Route::get('/archive', [PathTrainingController::class, 'archive'])->name('path.archive');
+        Route::post('/{id}/restore', [PathTrainingController::class, 'restore'])->name('path.restore');
+        Route::delete('/{id}/forceDelete', [PathTrainingController::class, 'forceDelete'])->name('path.forceDelete');
     });
 });
 

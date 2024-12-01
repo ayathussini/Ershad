@@ -13,13 +13,9 @@ class Course extends Model
 
     protected $dates = ['deleted_at'];
     protected $table = 'courses'; 
+    protected $guarded = [];
 
 
-    protected $fillable = [
-        'title',
-        'description',
-        'instructor',
-        'category',
-        'duration', 
-    ];
+   protected $fillable = ['title', 'description', 'instructor', 'duration', 'category','course_link'];
+
 }

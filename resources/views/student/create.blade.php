@@ -1,5 +1,4 @@
 @extends('includes.layout')
-
 @section('main')
  <div
       id="main-wrapper"
@@ -16,13 +15,13 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Edit agent</h4>
+              <h4 class="page-title">Students</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
-                    <a href="#">Edit agent</a></li>
+                    <a href="#">Add New</a></li>
                     </li>
                   </ol>
                 </nav>
@@ -34,28 +33,26 @@
 
         <!-- Container fluid -->
         <div class="container-fluid">
-          @if(Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-             {{ Session::get('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-           @endif
-
-           @if(Session::has('error'))
-           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-               {{ Session::get('error') }}
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-           </div>
-           @endif
+          @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
           <!-- Start Page Content -->
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <form class="form-horizontal" action="{{ route('agent.update', $agents->id) }}" enctype="multipart/form-data" method="post"
-                  name="userForm" id="userForm" >
-                  @method('PUT')
-                  @csrf
+                <form class="form-horizontal" action="{{ route('student.store') }}" method="post">
+                   @method('POST')
+                   @csrf
                   <div class="card-body">
+                  <div class="form-group row">
+                    
+                    </div>
                     <div class="form-group row">
                       <label
                         for="name_ar"
@@ -67,11 +64,10 @@
                           type="text"
                           class="form-control"
                           id="name_ar"
+                          placeholder="Name_ar Here"
                           name="name_ar"
-                          value="{{ old('name_ar', $agents->name_ar) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -84,11 +80,10 @@
                           type="text"
                           class="form-control"
                           id="name_en"
+                          placeholder="Name_en Here"
                           name="name_en"
-                          value="{{ old('name_en', $agents->name_en) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -101,11 +96,10 @@
                           type="text"
                           class="form-control"
                           id="age"
+                          placeholder="Age Here"
                           name="age"
-                          value="{{ old('age', $agents->age) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                    <div class="form-group row">
                     <label
@@ -121,7 +115,6 @@
                             id="customControlValidation1"
                             name="gender"
                             value="m"
-                            {{ old('gender', $agents->gender) == 'm' ? 'checked' : '' }}
                           />
                           <label
                             class="form-check-label mb-0"
@@ -136,7 +129,6 @@
                             id="customControlValidation2"
                             name="gender"
                             value="f"
-                            {{ old('gender', $agents->gender) == 'f' ? 'checked' : '' }}
                           />
                           <label
                             class="form-check-label mb-0"
@@ -157,11 +149,10 @@
                           type="text"
                           class="form-control"
                           id="email"
+                          placeholder="Email Here"
                           name="email"
-                          value="{{ old('email', $agents->email) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -174,13 +165,11 @@
                           type="text"
                           class="form-control"
                           id="phone"
+                          placeholder="Phone Here"
                           name="phone"
-                          value="{{ old('phone', $agents->phone) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
-                    </div>
-                    <div class="form-group row">
+                    </div><div class="form-group row">
                       <label
                         for="address"
                         class="col-sm-3 text-end control-label col-form-label"
@@ -191,11 +180,10 @@
                           type="text"
                           class="form-control"
                           id="address"
+                          placeholder="Address Name Here"
                           name="address"
-                          value="{{ old('address', $agents->address) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -208,11 +196,10 @@
                           type="text"
                           class="form-control"
                           id="city"
+                          placeholder="city Here"
                           name="city"
-                          value="{{ old('city', $agents->city) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -225,11 +212,10 @@
                           type="text"
                           class="form-control"
                           id="nationality"
+                          placeholder="Nationality Here"
                           name="nationality"
-                          value="{{ old('nationality', $agents->nationality) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -242,11 +228,10 @@
                           type="text"
                           class="form-control"
                           id="university"
+                          placeholder="University Here"
                           name="university"
-                          value="{{ old('university', $agents->university) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -259,11 +244,10 @@
                           type="text"
                           class="form-control"
                           id="faculty"
+                          placeholder="Faculty Here"
                           name="faculty"
-                          value="{{ old('faculty', $agents->faculty) }}"
                         />
                       </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
@@ -276,164 +260,84 @@
                           type="text"
                           class="form-control"
                           id="training_path"
+                          placeholder="Training_path Here"
                           name="training_path"
-                          value="{{ old('training_path', $agents->training_path) }}"
                         />
                       </div>
-                      </div>
-                      <div class="form-group row">
-                      <label
-                        for="years_of_experiense"
-                        class="col-sm-3 text-end control-label col-form-label"
-                        >Years_of_Exp</label
-                      >
-                      <div class="col-sm-9">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="years_of_experiense"
-                          name="years_of_experiense"
-                          value="{{ old('years_of_experiense', $agents->years_of_experiense) }}"
-                        />
-                      </div>
-                      <p class="text-danger"></p>
                     </div>
                     <div class="form-group row">
                       <label
-                        for="cv"
+                        for="personality_test_results"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >cv</label
-                      >
-                      <div class="col-sm-9">
-                        <input
-                          type="file"
-                          class="form-control"
-                          id="cv"
-                          name="cv"
-                          value="{{ old('cv', $agents->cv) }}"
-                        />
-                      </div>
-                      <p class="text-danger"></p>
-                    </div>  <div class="form-group row">
-                      <label
-                        for="support_type"
-                        class="col-sm-3 text-end control-label col-form-label"
-                        >Support_type</label
+                        >Personality_test_results</label
                       >
                       <div class="col-sm-9">
                         <input
                           type="text"
                           class="form-control"
-                          id="support_type"
-                          name="support_type"
-                          value="{{ old('support_type', $agents->support_type) }}"
+                          id="personality_test_results"
+                          placeholder="Personality_test_results Here"
+                          name="personality_test_results"
                         />
                       </div>
-                      <p class="text-danger"></p>
-                    </div> 
-                     <div class="form-group row">
+                    </div><div class="form-group row">
                       <label
-                        for="available_time"
+                        for="english_level_test_results"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >Available_time</label
+                        >English_level_test_results</label
                       >
                       <div class="col-sm-9">
                         <input
                           type="text"
                           class="form-control"
-                          id="available_time"
-                          name="available_time"
-                          value="{{ old('available_time', $agents->available_time) }}"
+                          id="english_level_test_results"
+                          placeholder="English_level_test_results Here"
+                          name="english_level_test_results"
                         />
                       </div>
-                      
-                      <p class="text-danger"></p>
                     </div>
-                    <p class="text-danger"></p>
-                   <div>                   
-                    <div class="border-top">
+                  </div>
+                  <div class="border-top">
                     <div class="card-body">
                       <button type="submit" class="btn btn-primary">
-                         <a href="{{ route('agent.index') }}" style="color: white" onsubmit="return confirm('Are you sure you want to update this agent?');">Save Changes
-                    
+                        <a href="" style="color: white">Add</a>
                       </button>
-                      <a href="{{ route('agent.index') }}" class="btn btn-secondary">
-                        Back
-                      </a>
                     </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- End Page Content -->
 
-
+        </div>
+        
+        
+      </div>
+      <!-- End Page wrapper -->
+    </div>
 @endsection
 
-
-@section('customJs')
+{{-- @section('customJs')
 <script>
     $('#userForm').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:'{{route("agent.update",$agents->id)}}',
+            url:'{{route("student.create")}}',
             type:'put',
             dataType: 'json' ,
             data :$('#userForm').serializeArray(),
             success:function(response){
                 if(response.status == true){
-                     $("#name_ar").removeClass('is-invalid')
+                     $("#name").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#name_en").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                      $("#age").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                      $("#gender").removeClass('is-invalid')
+                         $("#email").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#email").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                      $("#phone").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                      $("#address").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                      $("#city").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                      $("#university").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                      $("#faculty").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                      $("#nationality").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                      $("#training_path").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('') 
-                        $("#cv").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                      $("#years_of_experiense").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                        window.location.href="{{route('agent.index')}}";
+                        window.location.href="{{route('student.index')}}";
 
                 }else{
                     var errors=response.errors;
@@ -549,27 +453,36 @@
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }if(errors.cv){
-                        $("#cv").addClass('is-invalid')
+                    }if(errors.personality_test_results){
+                        $("#personality_test_results").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
-                        .html(errors.cv[0])
+                        .html(errors.personality_test_results[0])
                     }else{
-                        $("#cv").removeClass('is-invalid')
+                        $("#personality_test_results").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }if(errors.years_of_experiense){
-                        $("#years_of_experiense").addClass('is-invalid')
+                    }if(errors.english_level_test_results){
+                        $("#english_level_test_results").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
-                        .html(errors.years_of_experiense[0])
+                        .html(errors.english_level_test_results[0])
                     }else{
-                        $("#years_of_experiense").removeClass('is-invalid')
+                        $("#english_level_test_results").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }
+                    }if(errors.password){
+                        $("#password").addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(errors.password[0])
+                    }else{
+                        $("#password").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
                     }
                     
                 }
@@ -579,4 +492,4 @@
 
     })
     </script>
-@endsection
+@endsection --}}

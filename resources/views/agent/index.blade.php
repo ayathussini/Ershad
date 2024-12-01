@@ -45,6 +45,8 @@
                           <th>Phone</th>
                           <th>City</th>
                           <th>CV</th>
+                          <th>Support_type</th>
+                          <th>Available_time</th>
                           <th>Action</th>
                          
                         </tr>
@@ -62,6 +64,8 @@
                           <td>{{ $agent->phone}}</td>
                           <td>{{ $agent->city}}</td>
                           <td>{{ $agent->cv }}</td>
+                          <td>{{ $agent->support_type }}</td>
+                          <td>{{ $agent->available_time }}</td>
                           <td>
                             <a href="{{ route('agent.show', $agent->id) }}" class="btn btn-primary">show</a>
                             <a href="{{ route('agent.edit', $agent->id) }}" class="btn btn-success">edit</a>

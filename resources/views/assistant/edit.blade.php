@@ -315,8 +315,40 @@
                       </div>
                       <p class="text-danger"></p>
                     </div>
-                    <p class="text-danger"></p>
-                   <div>                   
+                     <div class="form-group row">
+                      <label
+                        for="support_type"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Support_type</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="support_type"
+                          name="support_type"
+                          value="{{ old('support_type', $assistants->support_type) }}"
+                        />
+                      </div>
+                      <p class="text-danger"></p>
+                    </div> 
+                     <div class="form-group row">
+                      <label
+                        for="available_time"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Available_time</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="available_time"
+                          name="available_time"
+                          value="{{ old('available_time', $assistants->available_time) }}"
+                        />
+                      </div>
+                      <p class="text-danger"></p>
+                    </div>
                     <div class="border-top">
                     <div class="card-body">
                       <button type="submit" class="btn btn-primary">
@@ -324,7 +356,7 @@
                     
                       </button>
                       <a href="{{ route('assistant.index') }}" class="btn btn-secondary">
-                        Cancel
+                        Back
                       </a>
                     </div>
 

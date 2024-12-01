@@ -84,11 +84,18 @@
                   class="dropdown-menu dropdown-menu-end user-dd animated"
                   aria-labelledby="navbarDropdown"
                 >
-                  <a class="dropdown-item" href="javascript:void(0)"
-                    ><i class="mdi mdi-account me-1 ms-1"></i> Admin</a
-                  >
+
+                  @if(Auth::check()) 
+                      <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                          <i class="mdi mdi-account me-1 ms-1"></i>{{ Auth::user()->name }}
+                      </a>
+                  @else
+                      <a class="dropdown-item" href="{{ route('login') }}">
+                          <i class="mdi mdi-account me-1 ms-1"></i>Login
+                      </a>
+                  @endif
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#"
+                  <a class="dropdown-item" href="{{ route('login') }}"
                     ><i class="fa fa-power-off me-1 ms-1"></i> Logout</a
                   >
                 </ul>

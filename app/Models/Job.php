@@ -16,7 +16,9 @@ class Job extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-protected $table = 'job'; 
+    protected $table = 'job'; 
+    protected $guarded = [];
+
 
     protected $fillable = [
         'title',

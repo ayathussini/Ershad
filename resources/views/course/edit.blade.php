@@ -93,6 +93,23 @@
                         />
                       </div>
                     </div>
+                     <div class="form-group row">
+                      <label
+                        for="category"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >category</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="category"
+                          placeholder="Category Here"
+                          name="category"
+                          value="{{ old('category', $courses->category) }}"
+                        />
+                      </div>
+                     </div>
                     <div class="form-group row">
                       <label
                         for="duration"
@@ -109,23 +126,24 @@
                           value="{{ old('duration', $courses->duration) }}"
                         />
                       </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> <div class="form-group row">
                       <label
-                        for="category"
+                        for="course_link"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >category</label
+                        >Course_link </label
                       >
                       <div class="col-sm-9">
                         <input
                           type="text"
                           class="form-control"
-                          id="category"
-                          placeholder="Category Here"
-                          name="category"
-                          value="{{ old('category', $courses->category) }}"
+                          id="course_link"
+                          placeholder="Course_link Here"
+                          name="course_link"
+                          value="{{ old('course_link', $courses->course_link) }}"
                         />
                       </div>
+                    </div>
+                   
                     </div>
                   <div class="border-top">
                     <div class="card-body">
@@ -133,6 +151,7 @@
                       <button  type="submit" class="btn btn-primary" onsubmit="return confirm('Are you sure you want to update this course?');">
                        Update
                       </button>
+                      <a href="{{ route('course.index') }}" class="btn btn-secondary">                                        
                         </a>
                     </div>
                   </div>

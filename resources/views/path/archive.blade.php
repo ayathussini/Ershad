@@ -5,13 +5,13 @@
             <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Course</h4>
+                <h4 class="page-title">Paths</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                        <a href="#">Add New</a></li>
+                        <a href="{{ route('path.create') }}">Add New</a></li>
                         </li>
                     </ol>
                     </nav>
@@ -41,7 +41,7 @@
                 <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Deleted Job</h5>
+                    <h5 class="card-title">Deleted path</h5>
                     <div class="table-responsive">
                         <table
                         id="zero_config"
@@ -50,37 +50,33 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
+                                <th>Name</th>
                                 <th>Description</th>
-                                <th>instructor</th>
-                                <th>duration</th>
-                                <th>category</th>
-                                <th>course_link</th>
+                                <th>Duration</th>
+                                <th>Level</th>
                                 <th>Deleted At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($courses as $course)
+                            @forelse ($paths as $path)
                                 <tr>
-                                    <td>{{ $course->id }}</td>
-                                    <td>{{ $course->title }}</td>
-                                    <td>{{ $course->description }}</td>
-                                    <td>{{ $course->instructor }}</td>
-                                    <td>{{ $course->duration }}</td>
-                                    <td>{{ $course->category }}</td>
-                                    <td>{{ $course->course_link }}</td>
-                                    <td>{{ $course->deleted_at }}</td>
+                                    <td>{{ $path->id }}</td>
+                                    <td>{{ $path->name }}</td>
+                                    <td>{{ $path->description }}</td>
+                                    <td>{{ $path->duration }}</td>
+                                    <td>{{ $path->level }}</td>
+                                    <td>{{ $path->deleted_at }}</td>
                                          <td>
                                         <!-- Restore Button -->
-                                        <form action="{{ route('course.restore', $course->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('path.restore', $path->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('POST')
                                             <button type="submit" class="btn btn-success">Restore</button>
                                         </form>
 
                                         <!-- Force Delete Button -->
-                                        <form action="{{ route('course.forceDelete', $course->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('path.forceDelete', $path->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>

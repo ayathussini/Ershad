@@ -29,5 +29,7 @@ class Agent extends Model
         'cv',
         'age',       
         'gender',     
+        'support_type', 
+        'available_time'
     ];
 }

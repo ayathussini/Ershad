@@ -46,6 +46,8 @@
                           <th>Phone</th>
                           <th>City</th>
                           <th>CV</th>
+                          <th>Support_type</th>
+                          <th>Available_time</th>
                           <th>Action</th>
                          
                         </tr>
@@ -66,6 +68,8 @@
                           <td>{{ $assistant->cv }}
                             <a href="{{ Storage::url($assistant->cv) }}" target="_blank">Download</a>
                           </td>
+                          <td>{{ $agent->support_type }}</td>
+                          <td>{{ $agent->available_time }}</td>
                           <td>
                             <a href="{{ route('assistant.show', $assistant->id) }}" class="btn btn-primary">show</a>
                             <a href="{{ route('assistant.edit', $assistant->id) }}" class="btn btn-success">edit</a>

@@ -146,9 +146,10 @@
                    
                   <div class="border-top">
                     <div class="card-body">
-                      <button type="submit" class="btn btn-primary">
+                      <button type="submit" class="btn btn-primary" onsubmit="return confirm('Are you sure you want to update this job?');">
                        Update
                       </button>
+                     <a href="{{ route('job.index') }}" class="btn btn-secondary">                   
                     </div>
                   </div>
                 </form>

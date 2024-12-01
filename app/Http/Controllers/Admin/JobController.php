@@ -31,39 +31,18 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_ar' => ['required','string','max:60','min:5'],
-            'name_en' => ['required','string','max:60','min:5'],
-            'email' => ['required','email','unique:Jobs'],
-            'phone' => ['required',
-            'regex:/^(010|011|012|015)[0-9]{8}$/'],
-            'address'=>['required','min:10'],
-            'city'=>['required','min:5'],
-            'university'=>['required','min:5'],
-            'faculty'=>['required','min:5'],
-            'nationality'=>['required','min:5'],
-            'training_path'=>['required','min:5'],
-            'personality_test_results'=>['required'],
-            'english_level_test_results'=>['required'],
-            'password' => ['required','min:8','same:confirm_password'],
-            'confirm_password' => ['required','min:8']
+        $valid=$request->validate([
+             'title' =>  ['required','string','max:60'],
+             'description' => ['required','string','max:60'],
+             'location' => ['required'],
+             'company' => ['required'],
+             'job_type' => ['required'],
+             'salary' => ['required'],
         ]);
-          Job::create([
-           'name_ar' => $request->name_ar,
-           'name_en' => $request->name_en,
-           'email' => $request->email,
-           'phone' => $request->phone,
-           'address' => $request->address,
-           'city' => $request->city,
-           'university' => $request->university,
-           'faculty' => $request->faculty,
-           'nationality' => $request->nationality,
-           'training_path' => $request->training_path,
-           'personality_test_results' => $request->personality_test_results,
-           'english_level_test_results' => $request->english_level_test_results,
-           'password' => md5($request->password), 
-    ]);
-        return redirect()->route('Job.index')->with('success', 'Job added successfully!');
+          Job::create($valid
+        
+        );
+        return redirect()->route('job.index')->with('success', 'Job added successfully!');
 
     }
 

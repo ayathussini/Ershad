@@ -42,6 +42,7 @@
                           <th>Instructor</th>
                           <th>Category</th>
                           <th>Duration</th>                 
+                          <th>Course_link</th>                 
                         </tr>
                       </thead>
                       <tbody>
@@ -54,6 +55,7 @@
                           <td>{{ $course->instructor}}</td>
                           <td>{{ $course->category}}</td>
                           <td>{{ $course->duration}}</td>
+                          <td>{{ $course->course_link}}</td>
                           <td>
                             <a href="{{ route('course.show', $course->id) }}" class="btn btn-primary">show</a>
                             <a href="{{ route('course.edit', $course->id) }}" class="btn btn-success">edit</a>

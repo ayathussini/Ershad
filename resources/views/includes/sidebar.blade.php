@@ -84,9 +84,42 @@
                     >
                   </li>
                   <li class="sidebar-item">
+                    <a href="{{ route('course.create') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu"> Create Course </span></a
+                    >
+                  </li><li class="sidebar-item">
                     <a href="{{ route('course.archive') }}" class="sidebar-link"
                       ><i class="mdi mdi-note-plus"></i
                       ><span class="hide-menu"> Deleted Course </span></a
+                    >
+                  </li>
+                </ul>
+              </li>
+               <li class="sidebar-item">
+                <a
+                  class="sidebar-link has-arrow waves-effect waves-dark"
+                  href="javascript:void(0)"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-receipt"></i
+                  ><span class="hide-menu">Paths </span></a
+                >
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="{{ route('path.index') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu"> All Paths </span></a
+                    >
+                  </li><li class="sidebar-item">
+                    <a href="{{ route('path.create') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu"> Create Paths </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="{{ route('path.archive') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu"> Deleted Path </span></a
                     >
                   </li>
                 </ul>
@@ -128,6 +161,11 @@
                       ><i class="mdi mdi-note-outline"></i
                       ><span class="hide-menu"> All jobs </span></a
                     >
+                  </li><li class="sidebar-item">
+                    <a href="{{ route('job.create') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu"> Create jobs </span></a
+                    >
                   </li>
                   <li class="sidebar-item">
                     <a href="{{ route('job.archive') }}" class="sidebar-link"
@@ -159,7 +197,34 @@
                   </li>
                 </ul>
               </li>
-              
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link has-arrow waves-effect waves-dark"
+                  href="javascript:void(0)"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-receipt"></i
+                  ><span class="hide-menu">Tasks </span></a
+                >
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="{{ route('tasks.index') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu"> All Tasks </span></a
+                    >
+                  </li><li class="sidebar-item">
+                    <a href="{{ route('tasks.create') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-outline"></i
+                      ><span class="hide-menu"> Create Tasks </span></a
+                    >
+                  </li>
+                  {{-- <li class="sidebar-item">
+                    <a href="{{ route('tasks.archive') }}" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu"> Deleted Tasks </span></a
+                    >
+                  </li> --}}
+                </ul>
+              </li>
             </ul>
           </nav>
           <!-- End Sidebar navigation -->

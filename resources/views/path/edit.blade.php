@@ -15,13 +15,13 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Application</h4>
+              <h4 class="page-name">Path</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
-                    <a href="#">Add New</a></li>
+                    <a href="{{ route('path.create') }}">Add New</a></li>
                     </li>
                   </ol>
                 </nav>
@@ -37,70 +37,87 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <form class="form-horizontal" action="{{ route('application.update', $applications->id) }}" enctype="multipart/form-data" method="post"
+                <form class="form-horizontal" action="{{ route('path.update', $paths->id) }}" enctype="multipart/form-data" method="post"
                 name="editform" id="editform">
                   @method('PUT')
                   @csrf
                   <div class="card-body">
                   <div class="form-group row">
                       <label
-                        for="student_id"
+                        for="name"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >Student_id</label
-                      >
-                      <div class="col-sm-9">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="student_id"
-                          placeholder="Student_id Here"
-                          name="student_id"
-                           value="{{ old('student_id', $applications->student_id) }}"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label
-                        for="job_id"
-                        class="col-sm-3 text-end control-label col-form-label"
-                        >Job_id</label
-                      >
-                      <div class="col-sm-9">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="job_id"
-                          placeholder="Job_id Here"
-                          name="job_id"
-                           value="{{ old('job_id', $applications->job_id) }}"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label
-                        for="status"
-                        class="col-sm-3 text-end control-label col-form-label"
-                        >Status</label
+                        >Name</label
                       >
                       <div class="col-sm-9">
                         <input
                           type="text"
                           class="form-control"
-                          id="status"
-                          placeholder="Status Here"
-                          name="status"
-                          value="{{ old('status', $applications->status) }}"
+                          id="name"
+                          placeholder="Name Here"
+                          name="name"
+                           value="{{ old('name', $paths->name) }}"
                         />
                       </div>
                     </div>
-                    <div class="border-top">
+                    <div class="form-group row">
+                      <label
+                        for="description"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Description</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="description"
+                          placeholder="Description Here"
+                          name="description"
+                           value="{{ old('description', $paths->description) }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="duration"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Duration</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="duration"
+                          placeholder="Duration Here"
+                          name="duration"
+                          value="{{ old('duration', $paths->duration) }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="level"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >Level</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="level"
+                          placeholder="Level Here"
+                          name="level"
+                          value="{{ old('level', $paths->level) }}"
+                        />
+                      </div>
+                    </div>                
+                  <div class="border-top">
                     <div class="card-body">
-                      <button  type="submit" class="btn btn-primary" onsubmit="return confirm('Are you sure you want to update this application?');">
+                      <button  type="submit" class="btn btn-primary" onsubmit="return confirm('Are you sure you want to update this path?');">
                        Update
                       </button>
-                      <div><a href="{{ route('application.index') }}" class="btn btn-secondary mt-3">Back</a>
-                        </a>
-                    </div>
+                      <a href="{{ route('path.index') }}" class="btn btn-secondary">
+                        Back
+                      </a>
                     </div>
                   </div>
                 </form>
@@ -121,60 +138,76 @@
     $('#editform').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:'{{route("application.update",$applications->id)}}',
+            url:'{{route("path.update",$paths->id)}}',
             type:'put',
             dataType: 'json' ,
             data :$('#editform').serializeArray(),
             success:function(response){
                 if(response.status == true){
-                     $("#student_id	").removeClass('is-invalid')
+                     $("#name	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#job_id").removeClass('is-invalid')
+                      $("#description	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#status").removeClass('is-invalid')
+                      $("#duration	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                        window.location.href="{{route('application.index')}}";
+                      $("#level").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                        window.location.href="{{route('path.index')}}";
 
                 }else{
                     var errors=response.errors;
-                    if(errors.student_id){
-                        $("#student_id").addClass('is-invalid')
+                    if(errors.name){
+                        $("#name").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
-                        .html(errors.student_id[0])
+                        .html(errors.name[0])
                     }else{
-                        $("#student_id").removeClass('is-invalid')
+                        $("#name").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }if(errors.job_id){
-                        $("#job_id").addClass('is-invalid')
+                    }if(errors.description){
+                        $("#description").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
-                        .html(errors.job_id[0])
+                        .html(errors.description[0])
                     }else{
-                        $("#job_id").removeClass('is-invalid')
-                        .siblings('p')
-                        .removeClass('invalid-feedback')
-                        .html('')
-                    }
-                    if(errors.status){
-                        $("#status").addClass('is-invalid')
-                        .siblings('p')
-                        .addClass('invalid-feedback')
-                        .html(errors.status[0])
-                    }else{
-                        $("#status").removeClass('is-invalid')
+                        $("#description").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
                     }
+                    if(errors.duration){
+                        $("#duration").addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(errors.duration[0])
+                    }else{
+                        $("#duration").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                    }
+                    if(errors.level){
+                        $("#level").addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(errors.level[0])
+                    }else{
+                        $("#level").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                    }
+                    
                 }
 
             }  

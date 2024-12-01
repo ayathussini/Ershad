@@ -15,7 +15,7 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Application</h4>
+              <h4 class="page-title">tasks</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -37,42 +37,76 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <form class="form-horizontal" action="{{ route('application.update', $applications->id) }}" enctype="multipart/form-data" method="post"
+                <form class="form-horizontal" action="{{ route('tasks.update', $tasks->id) }}" enctype="multipart/form-data" method="post"
                 name="editform" id="editform">
                   @method('PUT')
                   @csrf
                   <div class="card-body">
                   <div class="form-group row">
                       <label
-                        for="student_id"
+                        for="title"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >Student_id</label
+                        >Title</label
                       >
                       <div class="col-sm-9">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          id="student_id"
-                          placeholder="Student_id Here"
-                          name="student_id"
-                           value="{{ old('student_id', $applications->student_id) }}"
+                          id="title"
+                          placeholder="Title Here"
+                          name="title"
+                           value="{{ old('title', $tasks->title) }}"
                         />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label
-                        for="job_id"
+                        for="description"
                         class="col-sm-3 text-end control-label col-form-label"
-                        >Job_id</label
+                        >Description</label
                       >
                       <div class="col-sm-9">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          id="job_id"
-                          placeholder="Job_id Here"
-                          name="job_id"
-                           value="{{ old('job_id', $applications->job_id) }}"
+                          id="description"
+                          placeholder="Description Here"
+                          name="description"
+                           value="{{ old('description', $tasks->description) }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="student_id"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >student_id</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="student_id"
+                          placeholder="student_id Here"
+                          name="student_id"
+                          value="{{ old('student_id', $tasks->student->id) }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label
+                        for="due_date"
+                        class="col-sm-3 text-end control-label col-form-label"
+                        >due_date</label
+                      >
+                      <div class="col-sm-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="due_date"
+                          placeholder="due_date Here"
+                          name="due_date"
+                          value="{{ old('due_date', $tasks->due_date) }}"
                         />
                       </div>
                     </div>
@@ -87,20 +121,20 @@
                           type="text"
                           class="form-control"
                           id="status"
-                          placeholder="Status Here"
+                          placeholder="status Here"
                           name="status"
-                          value="{{ old('status', $applications->status) }}"
+                          value="{{ old('status', $tasks->status) }}"
                         />
                       </div>
                     </div>
-                    <div class="border-top">
+                  <div class="border-top">
                     <div class="card-body">
-                      <button  type="submit" class="btn btn-primary" onsubmit="return confirm('Are you sure you want to update this application?');">
+                      <button type="submit" class="btn btn-primary"onsubmit="return confirm('Are you sure you want to update this task?');">
                        Update
                       </button>
-                      <div><a href="{{ route('application.index') }}" class="btn btn-secondary mt-3">Back</a>
-                        </a>
-                    </div>
+                      <a href="{{ route('student.index') }}" class="btn btn-secondary">
+                        Back
+                      </a>
                     </div>
                   </div>
                 </form>
@@ -121,28 +155,57 @@
     $('#editform').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:'{{route("application.update",$applications->id)}}',
+            url:'{{route("tasks.update",$tasks->id)}}',
             type:'put',
             dataType: 'json' ,
             data :$('#editform').serializeArray(),
             success:function(response){
                 if(response.status == true){
-                     $("#student_id	").removeClass('is-invalid')
+                     $("#title	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#job_id").removeClass('is-invalid')
+                      $("#description	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                      $("#status").removeClass('is-invalid')
+                      $("#student_id	").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                        window.location.href="{{route('application.index')}}";
+                      $("#due_date").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                      $("#status		").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                        window.location.href="{{route('tasks.index')}}";
 
                 }else{
                     var errors=response.errors;
+                    if(errors.title){
+                        $("#title").addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(errors.title[0])
+                    }else{
+                        $("#title").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                    }if(errors.description){
+                        $("#description").addClass('is-invalid')
+                        .siblings('p')
+                        .addClass('invalid-feedback')
+                        .html(errors.description[0])
+                    }else{
+                        $("#description").removeClass('is-invalid')
+                        .siblings('p')
+                        .removeClass('invalid-feedback')
+                        .html('')
+                    }
                     if(errors.student_id){
                         $("#student_id").addClass('is-invalid')
                         .siblings('p')
@@ -153,18 +216,18 @@
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }if(errors.job_id){
-                        $("#job_id").addClass('is-invalid')
+                    }
+                    if(errors.due_date){
+                        $("#due_date").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
-                        .html(errors.job_id[0])
+                        .html(errors.due_date[0])
                     }else{
-                        $("#job_id").removeClass('is-invalid')
+                        $("#due_date").removeClass('is-invalid')
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }
-                    if(errors.status){
+                    }if(errors.status){
                         $("#status").addClass('is-invalid')
                         .siblings('p')
                         .addClass('invalid-feedback')
@@ -174,9 +237,8 @@
                         .siblings('p')
                         .removeClass('invalid-feedback')
                         .html('')
-                    }
+                    }    
                 }
-
             }  
          });
 

@@ -319,11 +319,11 @@
                     <div class="border-top">
                     <div class="card-body">
                       <button type="submit" class="btn btn-primary">
-                         <a href="{{ route('student.index') }}" style="color: white" >      Save Changes
-                    
+                         <a href="{{ route('student.index') }}" style="color: white" onsubmit="return confirm('Are you sure you want to update this student?');">
+                          Save Changes
                       </button>
                       <a href="{{ route('student.index') }}" class="btn btn-secondary">
-                        Cancel
+                        Back
                       </a>
                     </div>
 
