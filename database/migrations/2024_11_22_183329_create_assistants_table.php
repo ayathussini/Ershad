@@ -13,15 +13,19 @@ return new class extends Migration
     {
         Schema::create('assistants', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ar')->nullable(); 
-            $table->string('name_en')->nullable(); 
-            $table->string('email')->unique(); 
-            $table->string('phone')->nullable(); 
+            $table->integer('age')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->integer('years_of_experience')->nullable(); // Fixed typo
+            $table->integer('path')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
-            $table->string('university')->nullable(); 
+            $table->string('university')->nullable();
             $table->string('faculty')->nullable();
-            $table->string('nationality')->nullable(); 
+            $table->string('nationality')->nullable();
             $table->string('cv')->nullable();
             $table->timestamps();
         });
