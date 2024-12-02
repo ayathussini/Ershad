@@ -114,19 +114,17 @@
                         />
                       </div>
                     </div>
-               <div class="form-group row">
-    <label for="path_id" class="col-sm-3 text-end control-label col-form-label">Path</label>
-    <div class="col-sm-9">
-        <select name="path_id" id="path_id" class="form-control" required>
-            <option value="">Select Path</option>
-            @foreach($paths as $path)
-                <option value="{{ $path->id }}">{{ $path->name }}</option>
-            @endforeach
-        </select>
-    </div>
-</div>
-
-
+                    <div class="form-group row">
+                    <label for="path_id" class="col-sm-3 text-end control-label col-form-label">Path</label>
+                    <div class="col-sm-9">
+                        <select name="path_id" id="path_id" class="form-control" >
+                            <option value="">Select Path</option>
+                            @foreach($paths as $path)
+                                <option value="{{ $path->id }}">{{ $path->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    </div>
                   </div>
                   <div class="border-top">
                     <div class="card-body">

@@ -77,7 +77,7 @@
                                         <td>{{ $task->title }}</td>
                                         <td>{{ $task->description }}</td>
                                         <td>{{ $task->student->name_en }}</td>
-                                        <td>{{ $path->name ?? 'n/a' }}</td>
+                                        <td>{{ $task->path->name ?? 'n/a' }}</td>
                                         <td>{{ $task->due_date }}</td>
                                         <td>{{ $task->month }}</td>
                                          <td>{{ ucfirst($task->status) }}</td>
@@ -113,4 +113,10 @@
     <!-- End Container fluid -->
 </div>
 @endsection
+<script>
+    function filterTasks() {
+    document.getElementById('task-filter-form').submit();
+}
+
+</script>
    

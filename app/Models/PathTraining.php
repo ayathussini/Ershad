@@ -22,7 +22,7 @@ class PathTraining extends Model
     ];
     public function task()
 {
-    return $this->hasMany(Task::class);
+    return $this->hasMany(Task::class , 'path_id');
 }
 
 }

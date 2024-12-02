@@ -31,6 +31,7 @@ public function index(Request $request)
     return view('tasks.index', compact('tasks', 'month', 'paths', 'path_id'));
 }
 
+
 public function create()
 {
     $students = Student::all();
@@ -46,6 +47,7 @@ public function store(Request $request)
         'description' => 'required|string',
         'student_id' => 'required|exists:students,id',
         'due_date' => 'required|date',
+        'path_id' => 'required|exists:path_training,id',
     ]);
 
     Task::create($data);
@@ -56,7 +58,7 @@ public function edit(string $id)
         $tasks = Task::findOrFail($id);
         return view('tasks.edit', compact('tasks'));
     }
-            public function update(Request $request, string $id)
+    public function update(Request $request, string $id)
 {
     $tasks= Task::findOrFail($id);
 
@@ -65,6 +67,7 @@ public function edit(string $id)
         'description' => 'required|string',
         'student_id' => 'required|exists:students,id',
         'due_date' => 'required|date',
+        'path_id' => 'required|exists:path_training,id',
         'month' => 'required|string',
         'status' => 'required',
     ]);
