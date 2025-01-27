@@ -11,7 +11,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::all(); 
+        $students = Student::all();
         return view('student.index', compact('students'));
     }
 
@@ -42,7 +42,7 @@ public function store(Request $request)
         'personality_test_results' => 'required',
         'english_level_test_results' => 'required',
     ]);
-    
+
 
     try {
         $students = Student::create($validatedData);
@@ -109,10 +109,8 @@ public function store(Request $request)
             $students->password=$request->password;
             $students->update();
             session()->flash('success','User Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+                return redirect()->route('student.index')->with('success', 'Student updated successfully!');
+
          }else{
             return response()->json([
                 'status'=>false,
@@ -137,14 +135,14 @@ public function store(Request $request)
     public function restore($id)
     {
         $students = Student::onlyTrashed()->findOrFail($id);
-        $students->restore(); 
+        $students->restore();
         return redirect()->route('student.index')->with('success', 'Student restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $students = Student::onlyTrashed()->findOrFail($id);
-        $students->forceDelete(); 
+        $students->forceDelete();
         return redirect()->route('student.index')->with('success', 'Student permanently deleted!');
     }
 }

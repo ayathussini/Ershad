@@ -15,7 +15,7 @@ class AssistantController extends Controller
      */
     public function index()
     {
-        $assistants = Assistant::all(); 
+        $assistants = Assistant::all();
         return view('assistant.index', compact('assistants'));
         }
 
@@ -58,7 +58,7 @@ public function store(Request $request)
     ]);
     if ($request->hasFile('file')) {
         $assistants = $request->file('file')->store('uploads', 'public');
-    
+
 
     try {
         $assistants = assistant::create($validatedData);
@@ -128,10 +128,8 @@ public function store(Request $request)
             $assistants->available_time=$request->available_time;
             $assistants->update();
             session()->flash('success','User Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+                return redirect()->route('assistant.index')->with('success', 'assistant deleted successfully!');
+
          }else{
             return response()->json([
                 'status'=>false,
@@ -156,14 +154,14 @@ public function store(Request $request)
     public function restore($id)
     {
         $assistants = Assistant::onlyTrashed()->findOrFail($id);
-        $assistants->restore(); 
+        $assistants->restore();
         return redirect()->route('assistant.index')->with('success', 'assistant restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $assistants = Assistant::onlyTrashed()->findOrFail($id);
-        $assistants->forceDelete(); 
+        $assistants->forceDelete();
         return redirect()->route('assistant.index')->with('success', 'assistant permanently deleted!');
     }
 

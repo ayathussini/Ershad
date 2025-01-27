@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
-    
+
     public function index()
     {
         $applications = Application::with(['student', 'job'])->get();
@@ -76,10 +76,7 @@ class ApplicationController extends Controller
             $applications->status=$request->status;
             $applications->update();
             session()->flash('success','User Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+                 return redirect()->route('application.index')->with('success', 'application updated successfully!');
          }else{
             return response()->json([
                 'status'=>false,
@@ -108,14 +105,14 @@ class ApplicationController extends Controller
     public function restore($id)
     {
         $applications = Application::onlyTrashed()->findOrFail($id);
-        $applications->restore(); 
+        $applications->restore();
         return redirect()->route('application.index')->with('success', 'application restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $applications = Application::onlyTrashed()->findOrFail($id);
-        $applications->forceDelete(); 
+        $applications->forceDelete();
         return redirect()->route('application.index')->with('success', 'application permanently deleted!');
     }
 }

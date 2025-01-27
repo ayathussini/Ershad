@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 
 use App\Models\PathTraining;
@@ -61,10 +61,8 @@ class PathTrainingController extends Controller
             $paths->level=$request->level;
             $paths->update();
             session()->flash('success','Path Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+                return redirect()->route('path.index')->with('success', 'path updated successfully!');
+
          }else{
             return response()->json([
                 'status'=>false,
@@ -90,14 +88,14 @@ class PathTrainingController extends Controller
     public function restore($id)
     {
         $paths = PathTraining::onlyTrashed()->findOrFail($id);
-        $paths->restore(); 
+        $paths->restore();
         return redirect()->route('path.index')->with('success', 'path restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $paths = PathTraining::onlyTrashed()->findOrFail($id);
-        $paths->forceDelete(); 
+        $paths->forceDelete();
         return redirect()->route('path.index')->with('success', 'path permanently deleted!');
     }
 }

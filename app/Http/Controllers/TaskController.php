@@ -67,8 +67,6 @@ public function edit(string $id)
         'description' => 'required|string',
         'student_id' => 'required|exists:students,id',
         'due_date' => 'required|date',
-        'path_id' => 'required|exists:path_training,id',
-        'month' => 'required|string',
         'status' => 'required',
     ]);
     if($validator->passes()){
@@ -77,14 +75,10 @@ public function edit(string $id)
             $tasks->description=$request->description;
             $tasks->student_id=$request->student_id;
             $tasks->due_date=$request->due_date;
-            $tasks->month=$request->month;
             $tasks->status=$request->status;
             $tasks->update();
             session()->flash('success','User Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+            return redirect()->route('tasks.index')->with('success', 'task updated successfully!');
          }else{
             return response()->json([
                 'status'=>false,
@@ -98,6 +92,23 @@ public function edit(string $id)
     $tasks = Task::findOrFail($id);
     $tasks->delete();
     return redirect()->route('tasks.index')->with('success', 'task deleted successfully!');
+}
+ public function updateProgress(Task $task)
+{
+    //if compelete
+    if ($task->status == 'completed') {
+        $task->progress = 100;
+    } else {
+
+        $task->progress = 50;
+    }
+
+    $task->save();
+
+    return response()->json([
+        'message' => 'Task progress updated successfully',
+        'progress' => $task->progress,
+    ]);
 }
 
 

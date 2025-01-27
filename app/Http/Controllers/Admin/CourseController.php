@@ -14,7 +14,7 @@ class CourseController extends Controller
      */
    public function index()
     {
-        $courses = Course::all(); 
+        $courses = Course::all();
         return view('course.index', compact('courses'));
         }
 
@@ -85,10 +85,7 @@ class CourseController extends Controller
             $courses->duration=$request->duration;
             $courses->update();
             session()->flash('success','course Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+              return redirect()->route('course.index')->with('success', 'Course updated successfully!');;
          }else{
             return response()->json([
                 'status'=>false,
@@ -117,14 +114,14 @@ class CourseController extends Controller
     public function restore($id)
     {
         $courses = Course::onlyTrashed()->findOrFail($id);
-        $courses->restore(); 
+        $courses->restore();
         return redirect()->route('course.index')->with('success', 'Course restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $courses = Course::onlyTrashed()->findOrFail($id);
-        $courses->forceDelete(); 
+        $courses->forceDelete();
         return redirect()->route('course.index')->with('success', 'Course permanently deleted!');
     }
 

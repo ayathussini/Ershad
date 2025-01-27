@@ -109,6 +109,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
         Route::put('/{id}/update', [TaskController::class, 'update'])->name('tasks.update');
         Route::delete('/{id}/delete', [TaskController::class, 'delete'])->name('tasks.delete');
+        Route::put('/{id}/update-progress', [TaskController::class, 'updateProgress'])->name('tasks.updateProgress');
+
       
     });
     Route::prefix('path')->group(function () {

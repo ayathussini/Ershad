@@ -14,7 +14,7 @@ class AgentController extends Controller
      */
     public function index()
     {
-        $agents = Agent::all(); 
+        $agents = Agent::all();
         return view('agent.index', compact('agents'));
         }
 
@@ -57,7 +57,7 @@ public function store(Request $request)
     ]);
     if ($request->hasFile('file')) {
         $agents = $request->file('file')->store('uploads', 'public');
-    
+
 
     try {
         $agents = Agent::create($validatedData);
@@ -127,10 +127,8 @@ public function store(Request $request)
             $agents->available_time=$request->available_time;
             $agents->update();
             session()->flash('success','User Information Updated Successfully');
-             return response()->json([
-                'status'=>true,
-                'errors'=>[]
-            ]);
+                return redirect()->route('agent.index')->with('success', 'agent updated successfully!');
+
          }else{
             return response()->json([
                 'status'=>false,
@@ -155,14 +153,14 @@ public function store(Request $request)
     public function restore($id)
     {
         $agents = Agent::onlyTrashed()->findOrFail($id);
-        $agents->restore(); 
+        $agents->restore();
         return redirect()->route('agent.index')->with('success', 'agent restored successfully!');
     }
 
     public function forceDelete($id)
     {
         $agents = Agent::onlyTrashed()->findOrFail($id);
-        $agents->forceDelete(); 
+        $agents->forceDelete();
         return redirect()->route('agent.index')->with('success', 'agent permanently deleted!');
     }
 
