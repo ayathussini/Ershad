@@ -29,10 +29,30 @@ class Student extends Model
 ];
 
     protected $dates = ['deleted_at'];
-    
+
     public function applications()
 {
     return $this->hasMany(Application::class);
+}
+   public function paths()
+{
+    return $this->belongsToMany(PathTraining::class);
+}
+public function courses()
+{
+    return $this->belongsToMany(Course::class);
+}
+ public function assistants()
+{
+    return $this->hasMany(Assistant::class);
+}
+public function agent()
+{
+    return $this->belongsTo(Agent::class);
+}
+public function jobs()
+{
+    return $this->belongsToMany(Job::class);
 }
 
 

@@ -16,7 +16,7 @@ class Job extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'job'; 
+    protected $table = 'job';
     protected $guarded = [];
 
 
@@ -25,7 +25,13 @@ class Job extends Model
         'description',
         'location',
         'company',
-        'job_type', 
+        'job_type',
         'salary'
     ];
+    public function students()
+{
+    return $this->belongsToMany(Student::class);
+}
+
+
 }

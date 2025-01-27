@@ -61,7 +61,7 @@ public function store(Request $request)
 }
     public function show( $id)
     {
-        $students= Student::findOrFail($id);
+        $students= Student::with('path_training')->findOrFail($id);
         return view('student.show', compact('students'));
     }
 

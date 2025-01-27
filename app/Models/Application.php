@@ -17,11 +17,12 @@ public function job()
 {
     return $this->belongsTo(Job::class);
 }
+
   use HasFactory;
   use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'applications'; 
+    protected $table = 'applications';
 
     protected $fillable = [
         'student_id',

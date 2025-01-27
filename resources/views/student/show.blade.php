@@ -86,11 +86,18 @@
                                         <th>English Level Test Results</th>
                                         <td>{{ $students->english_level_test_results }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Path</th>
+                                        <td>@foreach ($student->paths as $path)
+                                            <p>{{ $path->name }}</p>
+                                        @endforeach
+                                    </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div><a href="{{ route('student.index') }}" class="btn btn-secondary mt-3">Back</a>
-                    <a href="{{ route('student.edit',$students->id) }}" class="btn btn-info mt-3">Edit</a></div>
+                    <a href="{{ route('student.edit', $students->id) }}" class="btn btn-info mt-3">Edit</a></div>
                     </div>
                 </div>
             </div>

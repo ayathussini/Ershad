@@ -24,5 +24,9 @@ class PathTraining extends Model
 {
     return $this->hasMany(Task::class , 'path_id');
 }
+    public function students()
+{
+    return $this->belongsToMany(Student::class);
+}
 
 }

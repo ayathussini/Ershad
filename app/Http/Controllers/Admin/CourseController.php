@@ -49,7 +49,7 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        $courses =Course::findOrFail($id);
+        $courses =Course::with('assistants')->findOrFail($id);
         return view('course.show', compact('courses'));
     }
 
@@ -124,5 +124,10 @@ class CourseController extends Controller
         $courses->forceDelete();
         return redirect()->route('course.index')->with('success', 'Course permanently deleted!');
     }
+   public function assignAssistantToCourse($courseId, $assistantId)
+{
+    $course = Course::findOrFail($courseId);
+    $course->assistants()->attach($assistantId);
+}
 
 }

@@ -12,7 +12,7 @@ class Assistant extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'assistants'; 
+    protected $table = 'assistants';
 
     protected $fillable = [
         'name_ar',
@@ -27,9 +27,18 @@ class Assistant extends Model
         'path',
         'years_of_experiense	',
         'cv',
-        'age',       
-        'gender',     
-        'support_type', 
+        'age',
+        'gender',
+        'support_type',
         'available_time'
     ];
+    public function student()
+{
+    return $this->belongsTo(Student::class);
+}
+public function courses()
+{
+    return $this->belongsToMany(Course::class);
+}
+
 }

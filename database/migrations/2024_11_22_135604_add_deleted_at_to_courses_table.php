@@ -12,7 +12,7 @@ return new class extends Migration
    public function up()
 {
     Schema::table('courses', function (Blueprint $table) {
-        $table->softDeletes(); // هذا يضيف عمود deleted_at
+        $table->softDeletes(); 
     });
 }
 
